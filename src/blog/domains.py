@@ -8,7 +8,7 @@ class User:
 @dataclass
 class Admin(User):
     """Пользователь, наделенный правами администратора"""
-    id: str
+    username: str
     password: str
 
 @dataclass
