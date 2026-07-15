@@ -2,7 +2,7 @@ from fastapi import APIRouter, status, HTTPException
 
 from blog.domains import Admin
 from blog.schemas import (
-    GetArticleModel,
+    GetArticlesModel,
     CreateArticleModel,
     LoginModel,
     GetArticleModel,
@@ -13,14 +13,14 @@ from blog.repositories import ShelveArticlesRepository, MemoryUserRepository
 
 router = APIRouter() # это роутер, он нужен для FastAPI, чтобы определять эндпоинты
 
-@router.get("/articles", response_model = GetArticleModel)
-def get_articles() -> GetArticleModel:
+@router.get("/articles", response_model = GetArticlesModel)
+def get_articles() -> GetArticlesModel:
     # во всех представлениях всегда происходит одно и то же: 
     # 1. получили данные 
     # 2. вызвали сервисный метод и получили из него результат
     # 3. вернули результат клиенту в виде ответа
     articles = services.get_articles(articles_repository = ShelveArticlesRepository())
-    return GetArticleModel(
+    return GetArticlesModel(
         items = [
             GetArticleModel(id = article.id, title = article.title, content = article.content)
             for article in articles
